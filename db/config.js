@@ -8,11 +8,16 @@ const MONGODB_URI =
 	process.env.MONGO_DEFAULT_DATABASE;
 
 module.exports = () => {
-	mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, err => {
-		if (err) {
-			throw new Error(`Error connecting to Database: ${err}`);
-		} else {
-			console.log("Connected to Database...");
-		}
-	});
+	try {
+
+		mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, err => {
+			if (err) {
+				throw new Error(`Error connecting to Database: ${err}`);
+			} else {
+				console.log("Connected to Database...");
+			}
+		});
+	} catch (err) {
+		throw new Error(`Error connecting to Database: ${err}`);
+	}
 };
