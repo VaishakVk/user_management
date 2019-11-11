@@ -1,0 +1,20 @@
+const app = require("../app");
+const http = require("http");
+
+const httpPort = process.env.PORT || 3000;
+
+app.set("port", httpPort);
+const options = {};
+const server = http.createServer(options, app).listen(httpPort);
+
+function onListening() {
+	const port = server.address().port;
+	console.log(`Listening to port ${port}`);
+}
+
+function onError(err) {
+	throw err;
+}
+
+server.on("listening", onListening);
+server.on("error", onError);
